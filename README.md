@@ -21,6 +21,9 @@ This application utlizes Ollama + Mistral model to run the AI on your local mach
 - **Stage 3** - The RAG searches, filters and sorts the texts according to the query. We utilize FastAPI for this.
 - **Stage 4** - The text is given to the LLM (Ollama with Mistral model in this case, but any model like Gemma, GPT, Llama etc can be used)
 
+## Demo Video
+```https://youtu.be/v2t2ERfuQZI```
+
 ## To-Do
 - [ ] Make the upload time shorter
 - [ ] Improve response style
