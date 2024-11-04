@@ -17,13 +17,10 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 
-# Create directories
 Path("static").mkdir(exist_ok=True)
 Path("templates").mkdir(exist_ok=True)
 Path("papers").mkdir(exist_ok=True)
 
-# First, let's create the HTML templates
-# Create templates/index.html
 index_html = """
 <!DOCTYPE html>
 <html>
@@ -47,14 +44,14 @@ index_html = """
         .left-panel {
             flex: 1;
             padding: 20px;
-            background: #f5f5f5;
+            background: f5f5f5;
             border-radius: 8px;
         }
         .right-panel {
             flex: 2;
             display: flex;
             flex-direction: column;
-            background: #fff;
+            background: fff;
             border-radius: 8px;
             border: 1px solid #ddd;
         }
@@ -268,7 +265,6 @@ index_html = """
 </html>
 """
 
-# Save the template
 with open("templates/index.html", "w") as f:
     f.write(index_html)
 
@@ -365,8 +361,6 @@ class ResearchPaperRAG:
                 })
                 relevant_text.append(doc.page_content)
         
-        # For now, we'll just return the most relevant text
-        # In a production system, you'd want to use an LLM to generate a proper answer
         response = f"Based on the papers, here's what I found:\n\n{relevant_text[:5]}"
         
         return {
@@ -374,12 +368,10 @@ class ResearchPaperRAG:
             "sources": sources
         }
 
-# FastAPI application
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-# Initialize RAG system
 rag_system = ResearchPaperRAG()
 
 @app.get("/", response_class=HTMLResponse)
